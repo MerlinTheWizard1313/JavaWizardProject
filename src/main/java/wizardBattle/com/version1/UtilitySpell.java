@@ -48,8 +48,10 @@ public class UtilitySpell extends Spell {
     public String castString(Wizard target) {
         if (getDuration() != 0){
             return " casted " + getElement() + " " + getName() + " for " + getDuration() + " seconds!\nApplied " + getStatusApplied() + " to " + target.getName();
-        } else {
+        } else if (getStatusApplied().equals("None")){
             return " casted " + getElement() + " " + getName() + "!";
+        } else {
+            return " casted " + getElement() + " " + getName() + "!\nApplied " + getStatusApplied() + " to " + target.getName();
         }
     }
 }

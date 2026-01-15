@@ -10,6 +10,11 @@ class AttackSpellTest {
     Wizard w = new Wizard("merlin",100,100);
     Wizard w2 = new Wizard("morgana",100,100);
 
+    @BeforeAll
+    static void before(){
+        System.out.println("AttackSpellTest Running");
+    }
+
     @BeforeEach
     void setUp(){
     }

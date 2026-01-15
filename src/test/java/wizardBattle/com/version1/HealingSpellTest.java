@@ -1,7 +1,6 @@
 package wizardBattle.com.version1;
 
 import org.junit.jupiter.api.*;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class HealingSpellTest {
@@ -10,6 +9,11 @@ class HealingSpellTest {
     HealingSpell a3 = new HealingSpell("Regeneration","Life", new UtilitySpell("Regen","Life",20,"Regeneration"),50);
     Wizard w = new Wizard("merlin",100,100);
     Wizard w2 = new Wizard("morgana",100,100);
+
+    @BeforeAll
+    static void before(){
+        System.out.println("HealingSpellTest Running");
+    }
 
     @BeforeEach
     void setUp() {

@@ -22,12 +22,6 @@ public class Main {
         em.persist(morgana);
         tx.commit();
         Wizard[] wizards = {merlin, morgana};
-//        Wizard chronicus = new Wizard("chronicus", 1,2);
-//        ArrayList<Spell> emptyList = new ArrayList<>();
-//        SpellBook sb2 = new SpellBook(emptyList,"emptyBook");
-//        chronicus.setSpellBook(sb2);
-//        chronicus.castSpell(0,merlin);
-//        new HealingSpell("poison","death",-1);
         boolean battleHappening = true;
         while(battleHappening){
             battleHappening = battleTurn(sc,merlin,wizards);
