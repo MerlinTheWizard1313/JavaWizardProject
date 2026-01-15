@@ -3,27 +3,29 @@ package wizardBattle.com.version1;
 import javax.persistence.*;
 
 @Entity
-public class HealingSpell extends UtilitySpell implements IHealing{
+public class HealingSpell extends Spell implements IHealing{
     @Column(name="healing_amount")
     private int healingAmount;
+    @ManyToOne
+    @JoinColumn(name = "utility_spell_id")
+    private UtilitySpell us;
 
-    public HealingSpell(String name, String element, int healingAmount) {
-        super(name, element);
+    public HealingSpell(String name, String element, UtilitySpell us, int healingAmount) {
+        super(name, element,us.getDuration());
         setHealingAmount(healingAmount);
-    }
-
-    public HealingSpell(String name, String element, String statusApplied, int healingAmount) {
-        super(name, element, statusApplied);
-        setHealingAmount(healingAmount);
-    }
-
-    public HealingSpell(String name, String element, double duration, String statusApplied, int healingAmount) {
-        super(name, element, duration, statusApplied);
-        setHealingAmount(healingAmount);
+        this.us = us;
     }
 
     public HealingSpell() {
         super();
+    }
+
+    public UtilitySpell getUs() {
+        return us;
+    }
+
+    public void setUs(UtilitySpell us) {
+        this.us = us;
     }
 
     public int getHealingAmount() {
@@ -45,8 +47,8 @@ public class HealingSpell extends UtilitySpell implements IHealing{
     @Override
     public String cast(Wizard caster, int spellIndex, Wizard target) {
         heal(target);
-        if(!this.getStatusApplied().equals("None")){
-            target.setCurrentStatus(this.getStatusApplied());
+        if(!us.getStatusApplied().equals("None")){
+            target.setCurrentStatus(us.getStatusApplied());
         }
         return caster.getName() + this.castString(target);
     }
@@ -54,7 +56,7 @@ public class HealingSpell extends UtilitySpell implements IHealing{
     @Override
     public String castString(Wizard target) {
         if (getDuration() != 0){
-            return " casted " + getElement() + " " + getName() + " for " + getDuration() + " seconds!\nIt healed for " + getHealingAmount() + " health.\n" + target.getName() + "'s Health: " + target.getHealth() + "\nApplied " + getStatusApplied() + " to " + target.getName();
+            return " casted " + getElement() + " " + getName() + " for " + getDuration() + " seconds!\nIt healed for " + getHealingAmount() + " health.\n" + target.getName() + "'s Health: " + target.getHealth() + "\nApplied " + us.getStatusApplied() + " to " + target.getName();
         } else {
             return " casted " + getElement() + " " + getName() + "!\nIt healed for " + getHealingAmount() + " health.\n" + target.getName() + "'s Health: " + target.getHealth();
         }

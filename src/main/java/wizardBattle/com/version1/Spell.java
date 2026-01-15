@@ -3,6 +3,8 @@ package wizardBattle.com.version1;
 import javax.persistence.*;
 
 @Entity
+@Inheritance(strategy = InheritanceType.JOINED)
+@DiscriminatorColumn(name="spell_type")
 public abstract class Spell implements ICastable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

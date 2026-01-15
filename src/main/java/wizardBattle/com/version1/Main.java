@@ -55,13 +55,15 @@ public class Main {
     public static SpellBook createSpellBook(EntityManager em){
         AttackSpell s1 = new AttackSpell("Missile","Fire", 0,100);
         UtilitySpell s2 = new UtilitySpell("Invisibility","Light", 10,"Invisible");
-        HealingSpell s3 = new HealingSpell("Repairo", "Life", 0, "None",30);
+        UtilitySpell n = new UtilitySpell("null spell","none","None");
+        HealingSpell s3 = new HealingSpell("Repairo", "Life", n,30);
         ArrayList<Spell> spells = new ArrayList<>();
         spells.add(s1);
         spells.add(s2);
         spells.add(s3);
         em.persist(s1);
         em.persist(s2);
+        em.persist(n);
         em.persist(s3);
         return new SpellBook(spells,"Farus Stupendus");
     }

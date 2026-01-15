@@ -5,9 +5,9 @@ import org.junit.jupiter.api.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 class HealingSpellTest {
-    HealingSpell a = new HealingSpell("Minor Healing","Life",25);
-    HealingSpell a2 = new HealingSpell("Healing","Life","None",100);
-    HealingSpell a3 = new HealingSpell("Regeneration","Life",20,"Regeneration",50);
+    HealingSpell a = new HealingSpell("Minor Healing","Life",new UtilitySpell("name","None","None"),25);
+    HealingSpell a2 = new HealingSpell("Healing","Life",new UtilitySpell("name","None","None"),100);
+    HealingSpell a3 = new HealingSpell("Regeneration","Life", new UtilitySpell("Regen","Life",20,"Regeneration"),50);
     Wizard w = new Wizard("merlin",100,100);
     Wizard w2 = new Wizard("morgana",100,100);
 
