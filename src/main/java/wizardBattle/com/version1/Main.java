@@ -1,21 +1,33 @@
 package wizardBattle.com.version1;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
+import javax.persistence.Persistence;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) throws SpellBookNotFoundException, SpellBookHasNoSpellsException {
         Scanner sc = new Scanner(System.in);
-        SpellBook sb = createSpellBook();
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("v1PersistentUnit");
+        EntityManager em = emf.createEntityManager();
+        EntityTransaction tx = em.getTransaction();
+        tx.begin();
+        SpellBook sb = createSpellBook(em);
+        em.persist(sb);
         Wizard merlin = createWizard(sb,"Merlin",100,40);
         Wizard morgana = createWizard(sb,"Morgana",250,5);
+        em.persist(merlin);
+        em.persist(morgana);
+        tx.commit();
         Wizard[] wizards = {merlin, morgana};
-        Wizard chronicus = new Wizard("chronicus", 1,2);
-        ArrayList<Spell> emptyList = new ArrayList<>();
-        SpellBook sb2 = new SpellBook(emptyList,"emptyBook");
-        chronicus.setSpellBook(sb2);
-        chronicus.castSpell(0,merlin);
-        new HealingSpell("poison","death",-1);
+//        Wizard chronicus = new Wizard("chronicus", 1,2);
+//        ArrayList<Spell> emptyList = new ArrayList<>();
+//        SpellBook sb2 = new SpellBook(emptyList,"emptyBook");
+//        chronicus.setSpellBook(sb2);
+//        chronicus.castSpell(0,merlin);
+//        new HealingSpell("poison","death",-1);
         boolean battleHappening = true;
         while(battleHappening){
             battleHappening = battleTurn(sc,merlin,wizards);
@@ -40,7 +52,7 @@ public class Main {
         }
     }
 
-    public static SpellBook createSpellBook(){
+    public static SpellBook createSpellBook(EntityManager em){
         AttackSpell s1 = new AttackSpell("Missile","Fire", 0,100);
         UtilitySpell s2 = new UtilitySpell("Invisibility","Light", 10,"Invisible");
         HealingSpell s3 = new HealingSpell("Repairo", "Life", 0, "None",30);
@@ -48,6 +60,9 @@ public class Main {
         spells.add(s1);
         spells.add(s2);
         spells.add(s3);
+        em.persist(s1);
+        em.persist(s2);
+        em.persist(s3);
         return new SpellBook(spells,"Farus Stupendus");
     }
 

@@ -1,12 +1,28 @@
 package wizardBattle.com.version1;
 
+import javax.persistence.*;
+
+@Entity
 public class Wizard {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="wizard_id")
+    private int id;
+    @Column(name="wizard_name")
     private String name;
+    @Column(name="has_spellbook")
     private boolean hasSpellBook = false;
+    @ManyToOne
+    @JoinColumn(name = "wizards_spellbook")
     private SpellBook spellBook;
+    @Column(name="health")
     private int health;
+    @Column(name="defence")
     private int defence;
+    @Column(name="status")
     private String currentStatus = "None";
+
+    public Wizard(){}
 
     public Wizard(String name,int health, int defence){
         setName(name);

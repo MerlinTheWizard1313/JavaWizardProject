@@ -1,9 +1,21 @@
 package wizardBattle.com.version1;
 
+import javax.persistence.*;
+
+@Entity
 public abstract class Spell implements ICastable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="spell_id")
+    private int id;
+    @Column(name="spell_name")
     private String name;
+    @Column(name="element")
     private String element;
+    @Column(name="duration")
     private double duration;
+
+    public Spell(){}
 
     public Spell(String name, String element) {
         setName(name);

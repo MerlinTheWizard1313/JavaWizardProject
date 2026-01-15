@@ -1,21 +1,36 @@
 package wizardBattle.com.version1;
 
-import java.util.ArrayList;
+import javax.persistence.*;
+import java.util.List;
 
+@Entity
 public class SpellBook{
-    private ArrayList<Spell> spells;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="spellbook_id")
+    private int id;
+    @ManyToMany
+    @JoinTable(
+            name = "spell_library",
+            joinColumns = @JoinColumn(name = "spellbook_id"),
+            inverseJoinColumns = @JoinColumn(name = "spell_id"))
+    @Column(name="spells")
+    private List<Spell> spells;
+    @Column(name="spellbook_name")
     private String bookName;
 
-    public SpellBook(ArrayList<Spell> spells, String bookName) {
+    public SpellBook(){}
+
+    public SpellBook(List<Spell> spells, String bookName) {
         setSpells(spells);
         setBookName(bookName);
     }
 
-    public ArrayList<Spell> getSpells() {
+    public List<Spell> getSpells() {
         return spells;
     }
 
-    public void setSpells(ArrayList<Spell> spells) {
+    public void setSpells(List<Spell> spells) {
         this.spells = spells;
     }
 

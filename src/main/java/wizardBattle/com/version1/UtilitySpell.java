@@ -1,6 +1,10 @@
 package wizardBattle.com.version1;
 
+import javax.persistence.*;
+
+@Entity
 public class UtilitySpell extends Spell {
+    @Column(name="status_applied")
     private String statusApplied;
 
     public UtilitySpell(String name, String element) {
@@ -17,6 +21,8 @@ public class UtilitySpell extends Spell {
         super(name, element, duration);
         setStatusApplied(statusApplied);
     }
+
+    public UtilitySpell() {}
 
     public String getStatusApplied() {
         return statusApplied;

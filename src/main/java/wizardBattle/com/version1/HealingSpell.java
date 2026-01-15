@@ -1,6 +1,10 @@
 package wizardBattle.com.version1;
 
+import javax.persistence.*;
+
+@Entity
 public class HealingSpell extends UtilitySpell implements IHealing{
+    @Column(name="healing_amount")
     private int healingAmount;
 
     public HealingSpell(String name, String element, int healingAmount) {
@@ -16,6 +20,10 @@ public class HealingSpell extends UtilitySpell implements IHealing{
     public HealingSpell(String name, String element, double duration, String statusApplied, int healingAmount) {
         super(name, element, duration, statusApplied);
         setHealingAmount(healingAmount);
+    }
+
+    public HealingSpell() {
+        super();
     }
 
     public int getHealingAmount() {

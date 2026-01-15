@@ -1,6 +1,10 @@
 package wizardBattle.com.version1;
 
+import javax.persistence.*;
+
+@Entity
 public class AttackSpell extends Spell implements ICanDealDamage{
+    @Column(name="power")
     private int power;
 
     public AttackSpell(String name, String element, int power) {
@@ -12,6 +16,8 @@ public class AttackSpell extends Spell implements ICanDealDamage{
         super(name, element, duration);
         this.power = power;
     }
+
+    public AttackSpell() {}
 
     public int getPower() {
         return power;
