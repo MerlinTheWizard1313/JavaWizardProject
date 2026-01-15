@@ -26,9 +26,7 @@ class AttackSpellTest {
 
     @Test
     void R001_setPower_T002() {
-        Throwable throwable =  assertThrows(Throwable.class, () -> {
-            a.setPower(-1);
-        });
+        Throwable throwable =  assertThrows(Throwable.class, () -> a.setPower(-1));
         assertEquals(IllegalArgumentException.class, throwable.getClass());
     }
 

@@ -29,9 +29,7 @@ class HealingSpellTest {
 
     @Test
     void R001_setHealingAmount_T002() {
-        Throwable throwable =  assertThrows(Throwable.class, () -> {
-            a.setHealingAmount(-10);
-        });
+        Throwable throwable =  assertThrows(Throwable.class, () -> a.setHealingAmount(-10));
         assertEquals(IllegalHealingAmountException.class, throwable.getClass());
     }
 
